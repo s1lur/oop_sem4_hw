@@ -1,0 +1,3 @@
+sfml-app
+*.o
+.DS_Store
