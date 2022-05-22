@@ -48,11 +48,10 @@ public:
         setView();
         mPlayer.applyVelocity({0, mGravity * dt});
         mPlayer.update(dt);
-        mPlayer.handleAllCollisions(mBlocks);
+        mPlayer.handleAllCollisions(mBlocks, mEnemies);
         std::vector<size_t> enemies_to_delete;
         for (size_t i = 0; i < mEnemies.size(); i++)
         {
-            mPlayer.handleCollision(mEnemies[i]);
             if (mPlayer.handleAttackCollision(mEnemies[i]))
                 enemies_to_delete.push_back(i);
         }

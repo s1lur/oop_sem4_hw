@@ -19,7 +19,7 @@ public:
     void draw(sf::RenderWindow& window);
     void handleEvents(const sf::Event& event);
     bool handleCollision(const sf::FloatRect& rect);
-    void handleAllCollisions(const std::vector<sf::FloatRect>& blocks);
+    void handleAllCollisions(const std::vector<sf::FloatRect>& blocks, const std::vector<sf::FloatRect>& enemies);
     bool handleAttackCollision(const sf::FloatRect& enemy);
 
     ~Player();

@@ -147,13 +147,18 @@ bool Player::handleCollision(const sf::FloatRect& rect)
     return true;
 }
 
-void Player::handleAllCollisions(const std::vector<sf::FloatRect>& blocks)
+void Player::handleAllCollisions(const std::vector<sf::FloatRect>& blocks, const std::vector<sf::FloatRect>& enemies)
 {
     mIsColliding = false;
 
     for (const sf::FloatRect& block : blocks)
     {
         if (handleCollision(block))
+            mIsColliding = true;
+    }
+    for (const sf::FloatRect& enemy: enemies)
+    {
+        if (handleCollision(enemy))
             mIsColliding = true;
     }
 
