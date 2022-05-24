@@ -58,7 +58,7 @@ void Player::draw(sf::RenderWindow& window)
 {
     window.draw(mSprite);
 
-    if (false) // For debuging
+    if (true) // For debuging
     {
         sf::RectangleShape shape {{mCollisionRect.width, mCollisionRect.height}};
         shape.setPosition(mPosition.x + mCollisionRect.left, mPosition.y + mCollisionRect.top);

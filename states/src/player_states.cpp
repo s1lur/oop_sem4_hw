@@ -413,13 +413,14 @@ void Hooked::hitGround(Player* player)
 Sitting::Sitting(Player* player) 
 {
     player->mVelocity = {0, 0};
-    mAnimation = Animation();
-    mAnimation.setAnimationSpeed(6);
-    mAnimation.addTextureRect({ 164, 350, 24, 21});
-    mAnimation.addTextureRect({ 214, 350, 24, 21});
-    mAnimation.addTextureRect({264, 350, 24, 21});
-    player->mCollisionRect = player->mScaleFactor * sf::FloatRect(-9, -10, 20, 19);
-    player->mPosition.y += player->mScaleFactor * 10;
+    mAnimation = Animation(Animation::AnimationType::OneIteration);
+    mAnimation.setAnimationSpeed(25);
+    mAnimation.addTextureRect({ 65, 340, 19, 29});
+    mAnimation.addTextureRect({116, 340, 22, 29});
+    mAnimation.addTextureRect({168, 340, 20, 29});
+    mAnimation.addTextureRect({221, 340, 15, 29});
+
+    player->mCollisionRect = player->mScaleFactor * sf::FloatRect(-10, 0, 20, 15);
     
     cout << "Creating Sitting state" << endl;
 }
@@ -434,7 +435,6 @@ void Sitting::update(Player* player, float dt)
     mAnimation.update(dt);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        player->mPosition.y -= player->mScaleFactor * 6;
         player->setState(new Running(player));
     }
 }
@@ -445,13 +445,11 @@ void Sitting::handleEvents(Player* player, const sf::Event& event)
     {
         if (event.key.code == sf::Keyboard::Left || event.key.code == sf::Keyboard::Right)
         {
-            player->mPosition.y -= player->mScaleFactor * 6;
             player->setState(new Running(player));
         }
 
         else if (event.key.code == sf::Keyboard::Space)
         {
-            player->mPosition.y -= player->mScaleFactor * 6;
             jump(player);
         }
     }
@@ -459,7 +457,6 @@ void Sitting::handleEvents(Player* player, const sf::Event& event)
     {
         if (event.key.code == sf::Keyboard::LShift)
         {
-            player->mPosition.y -= player->mScaleFactor * 6;
             player->setState(new Idle(player));
         }
     }
@@ -467,7 +464,6 @@ void Sitting::handleEvents(Player* player, const sf::Event& event)
 
 void Sitting::startFalling(Player* player)
 {
-    player->mPosition.y -= player->mScaleFactor * 6;
     player->setState(new Falling(player));
 }
 
